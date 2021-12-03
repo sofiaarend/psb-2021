@@ -17,7 +17,7 @@
 
 static struct option const long_options[] =
 {
-  {"tg", required_argument, NULL, "tg"},
+  {"tg", required_argument, NULL, 0},
   {GETOPT_HELP_OPTION_DECL},
   {GETOPT_VERSION_OPTION_DECL},
   {NULL, 0, NULL, 0}
@@ -25,14 +25,20 @@ static struct option const long_options[] =
 
 
 void
-usage (int status)
-{
-  if (status != EXIT_SUCCESS)
-    emit_try_help ();
-  else
-    {
+usage (int status) {
+    if (status != EXIT_SUCCESS) {
+      emit_try_help ();
+    } else {
         printf (_("\
-            Usage: %s [OPTION]... [+FORMAT]\n\
-            "), program_name, program_name);
+            Usage: %s [FILE]\n\
+        "), program_name, program_name);
+        fputs (_("\
+            Generate a file with a tag cloud with the words in the given FILE.\n\
+        "), stdout);
     }
+}
+
+int main() {
+
+    return 0;
 }
