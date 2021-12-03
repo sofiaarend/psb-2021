@@ -39,6 +39,30 @@ void usage (int status) {
     }
 }
 
+void getFrequency(char word){
+    char word[qtd],   aux[20],
+         matriz[20][1][20]={0};
+
+    int i,soma=0,w=0,k ,
+        vetor[80]={0},f;
+
+    printf("Type : ");
+    fgets(word, qtd, stdin);
+
+    for(i=0; i<strlen(word); i++){
+
+        aux[w]=word[i];
+
+        if(word[i] == ' ' || word[i] == '\n'){
+            aux[w]='\0';
+            strcpy(matriz[soma][0],aux);
+            soma++;
+            w=-1;
+        }
+
+        w++;
+}
+
 int main(int argc, char argv) {
    FILE *output = fopen("new-tgc.csv", "w");
     if (!output) {
@@ -61,6 +85,8 @@ int main(int argc, char argv) {
         printf("Couldn't open file\n");
         return 1;
     }
+
+    getFrequency(_argv);
 
     return 0;
 }
