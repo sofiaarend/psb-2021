@@ -6,6 +6,8 @@
 #include <config.h>
 #include <stdio.h>
 #include <getopt.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* The official name of this program.s */
 #define PROGRAM_NAME "tg"
@@ -24,8 +26,7 @@ static struct option const long_options[] =
 };
 
 
-void
-usage (int status) {
+void usage (int status) {
     if (status != EXIT_SUCCESS) {
       emit_try_help ();
     } else {
@@ -38,7 +39,28 @@ usage (int status) {
     }
 }
 
-int main() {
+int main(int argc, char argv) {
+   FILE *output = fopen("new-tgc.csv", "w");
+    if (!output) {
+        printf("Couldn't create output file\n");
+        return 1;
+    }
+
+    FILE *file = fopen(argv, "r");
+    if (file) {
+        fseek (file, 0, SEEK_END);
+        length = ftell (file);
+        fseek (file, 0, SEEK_SET);
+
+        string = malloc (length);
+        if (string) {
+            fread (string, 1, length, file);
+        }
+    }
+    else {
+        printf("Couldn't open file\n");
+        return 1;
+    }
 
     return 0;
 }
