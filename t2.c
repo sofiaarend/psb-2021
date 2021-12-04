@@ -109,7 +109,7 @@ int main(int argc, char argv) {
         return 1;
     }
 
-    getFrequency(string, file);
+    getFrequency(string, output);
 
     return 0;
 }
