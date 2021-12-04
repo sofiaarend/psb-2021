@@ -39,28 +39,51 @@ void usage (int status) {
     }
 }
 
-void getFrequency(char word){
-    char word[qtd],   aux[20],
-         matriz[20][1][20]={0};
+void getFrequency(char text, FILE *output){
+    if(!text) return;
 
-    int i,soma=0,w=0,k ,
-        vetor[80]={0},f;
+    char aux[20], words[20][1][20]={0};
 
-    printf("Type : ");
-    fgets(word, qtd, stdin);
+    int i, j = 0;
+    int sum = 0, times[80] = {0};
 
-    for(i=0; i<strlen(word); i++){
-
-        aux[w]=word[i];
-
-        if(word[i] == ' ' || word[i] == '\n'){
-            aux[w]='\0';
-            strcpy(matriz[soma][0],aux);
-            soma++;
-            w=-1;
+    for(i = 0; i < strlen(text); i++) {
+        aux[j] = text[i];
+        if(text[i] == ' ' || text[i] == '\n') {
+            aux[j]='\0';
+            strcpy(words[sum][0], aux);
+            sum++;
+            j=-1;
         }
+        j++;
+    }
+	for(j = 0; j < sum; j++) {
+        if(!times[j]) times[j]++;  
 
-        w++;
+        for(i = 0; i < sum; i++) {
+            if(strcmp(words[j][0], words[i][0]) == 0 && j != i ) {
+                times[j]++;
+                strcpy(words[i][0], "");
+            }
+        }
+	}
+    for(w = 0; w < sum; w++) {
+        if(strcmp(words[w][0],"") != 0){
+            fprintf(output, "A Palavra ");
+            fprintf(output, "%10s ", words[w][0]);
+
+            fprintf(output, " Apareceu ");
+            fprintf(output, "%2d ",times[w]);
+
+            if (times[w] == 1) {
+                fprintf(output, " Vez   ");
+            } else {
+                fprintf(output, " Vezes ");
+            }
+
+            fprintf(output, "Na Frase\n");
+        }
+    }
 }
 
 int main(int argc, char argv) {
@@ -86,7 +109,7 @@ int main(int argc, char argv) {
         return 1;
     }
 
-    getFrequency(_argv);
+    getFrequency(string, file);
 
     return 0;
 }
