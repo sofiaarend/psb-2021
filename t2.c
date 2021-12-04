@@ -57,7 +57,7 @@ void getFrequency(char text, FILE *output){
         }
         j++;
     }
-	for(j = 0; j < sum; j++) {
+    for(j = 0; j < sum; j++) {
         if(!times[j]) times[j]++;  
 
         for(i = 0; i < sum; i++) {
@@ -66,7 +66,7 @@ void getFrequency(char text, FILE *output){
                 strcpy(words[i][0], "");
             }
         }
-	}
+    }
     for(w = 0; w < sum; w++) {
         if(strcmp(words[w][0],"") != 0){
             fprintf(output, "A Palavra ");
