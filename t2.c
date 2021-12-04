@@ -103,6 +103,7 @@ int main(int argc, char argv) {
         if (string) {
             fread (string, 1, length, file);
         }
+        fclose(file);
     }
     else {
         printf("Couldn't open file\n");
@@ -110,6 +111,7 @@ int main(int argc, char argv) {
     }
 
     getFrequency(string, output);
+    fclose(output);
 
     return 0;
 }
